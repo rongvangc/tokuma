@@ -9,14 +9,11 @@ import StoreProfile from "../components/StoreProfile/StoreProfile";
 class Store extends Component {
 
   state = {
-    basic: {
+    formData: {
       storeName: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          label: 'Store Name',
-          size: 'w100',
-          placeholder: 'Name'
         },
         value: 'K.O.I Thé',
         validation: {
@@ -29,9 +26,6 @@ class Store extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          label: 'Store Address',
-          size: 'w50',
-          placeholder: 'Address'
         },
         value: '521 Hồ Tùng Mậu, D1, HCM',
         validation: {
@@ -43,14 +37,11 @@ class Store extends Component {
       storeDistrict: {
         elementType: 'select',
         elementConfig: {
-          size: 'w25',
-          label: 'District',
           option: [
             {value: 'district_1', displayValue: 'District 1'},
             {value: 'district_2', displayValue: 'District 2'},
             {value: 'district_3', displayValue: 'District 3'},
           ],
-          placeholder: 'District'
         },
         value: 'District 1',
         validation: {},
@@ -59,13 +50,10 @@ class Store extends Component {
       storeCity: {
         elementType: 'select',
         elementConfig: {
-          size: 'w25',
-          label: 'City',
           option: [
             {value: 'hcm', displayValue: 'Hồ Chí Minh'},
             {value: 'hn', displayValue: 'Hà Nội'}
           ],
-          placeholder: 'City'
         },
         value: 'Hồ Chí Minh',
         validation: {},
@@ -75,9 +63,6 @@ class Store extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'number',
-          label: 'Phone #',
-          size: 'w100',
-          placeholder: 'Phone'
         },
         value: '(338) 886-9944',
         validation: {
@@ -86,15 +71,10 @@ class Store extends Component {
         valid: false,
         touched: false
       },
-    },
-    invoice: {
       companyName: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          label: 'Company Name',
-          size: 'w100',
-          placeholder: 'Name'
         },
         value: 'K.O.I Thé International Company',
         validation: {
@@ -107,9 +87,6 @@ class Store extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          label: 'Company Address',
-          size: 'w50',
-          placeholder: 'Address'
         },
         value: '9682 Wakehurst Avenue Arlington Height, IL 60004',
         validation: {
@@ -121,14 +98,11 @@ class Store extends Component {
       companyDistrict: {
         elementType: 'select',
         elementConfig: {
-          size: 'w25',
-          label: 'District',
           option: [
             {value: 'district_1', displayValue: 'District 1'},
             {value: 'district_2', displayValue: 'District 2'},
             {value: 'district_3', displayValue: 'District 3'},
           ],
-          placeholder: 'District'
         },
         value: 'District 1',
         validation: {},
@@ -137,13 +111,10 @@ class Store extends Component {
       companyCity: {
         elementType: 'select',
         elementConfig: {
-          size: 'w25',
-          label: 'City',
           option: [
             {value: 'hcm', displayValue: 'Hồ Chí Minh'},
             {value: 'hn', displayValue: 'Hà Nội'}
           ],
-          placeholder: 'City'
         },
         value: 'Hồ Chí Minh',
         validation: {},
@@ -153,9 +124,6 @@ class Store extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          label: 'MST',
-          size: 'w100',
-          placeholder: 'MST'
         },
         value: 'P77744944',
         validation: {
@@ -177,46 +145,28 @@ class Store extends Component {
     this.setState({edit: false})
   }
 
-  dataChangeHandler = (event, inputKey) => {
-    // Copy state
-    const updatedForm = {
-      ...this.state.basic
-    }
+  // dataChangeHandler = (event, inputKey) => {
+  //   // Copy state
+  //   const updatedForm = {
+  //     ...this.state.formData
+  //   }
     
-    // const Key state
-    const updateFormElement = {
-      ...updatedForm[inputKey]
-    }
+  //   // const Key state
+  //   const updateFormElement = {
+  //     ...updatedForm[inputKey]
+  //   }
 
-    // get data from input 
-    updateFormElement.value = event.target.value;
+  //   // get data from input 
+  //   updateFormElement.value = event.target.value;
 
-    // set data
-    updatedForm[inputKey] = updateFormElement;
+  //   // set data
+  //   updatedForm[inputKey] = updateFormElement;
 
 
-    this.setState({basic: updatedForm, invoice: updatedForm})
-  }
+  //   this.setState({formData: updatedForm})
+  // }
 
   render() {
-    const infoArray = [];
-    for(let key in this.state.basic) {
-      infoArray.push({
-        id: key,
-        config: this.state.basic[key]
-      })
-    }
-
-    const invoiceArray = [];
-    for(let key in this.state.invoice) {
-      invoiceArray.push({
-        id: key,
-        config: this.state.invoice[key]
-      })
-    }
-
-    console.log(infoArray);
-    console.log(invoiceArray);
     
     return (
       <Fragment>
@@ -225,17 +175,12 @@ class Store extends Component {
           closedModal={this.closedModal}
         >
           <StoreProfile 
-            closedPopup={this.closedModal} 
-            basic={infoArray}
-            invoice={invoiceArray}
-            dataChanged={this.dataChangeHandler}
-            saveChanged={this.dataSaveChangeHandler}
+            data={this.state.formData}
           />
         </Modal>
         <div className={styles.Store}>
           <img src={Logo} alt="" />
-          <StoreInfo heading="STORE INFO." details={infoArray} dataChanged={this.dataChangeHandler} />
-          <StoreInfo heading="REB INVOICE INFO." details={invoiceArray} dataChanged={this.dataChangeHandler} />
+          <StoreInfo data={this.state.formData} dataChanged={this.dataChangeHandler} />
           <Button 
             btnType="Gray" 
             clicked={this.editHandler}

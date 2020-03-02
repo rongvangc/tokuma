@@ -7,57 +7,29 @@ const Input = (props) => {
 
   switch (props.elementType) {
     case "input":
-      if(props.elementConfig.size === 'w50') {
-        inputElement = (
-          <div className={[styles.Input, props.elementConfig.size, styles.w50].join(' ')} >
-            <label>{props.elementConfig.label}</label>
-            <input 
-              placeholder={props.elementConfig.placeholder} 
-              onChange={props.changed}
-            />
-          </div>
-        )
-      } else {
-        inputElement = (
-          <div className={[styles.Input, props.elementConfig.size].join(' ')} >
-            <label>{props.elementConfig.label}</label>
-            <input 
-              placeholder={props.elementConfig.placeholder} 
-              onChange={props.changed}
-            />
-          </div>
-        )
-      }
+      inputElement = <input type={props.type} placeholder={props.label} value={props.value} />
       break;
     case "select":
-      if(props.elementConfig.size === 'w25') {
-        inputElement = (
-          <div className={[styles.Input, props.size, styles.w25].join(' ')} >
-            <label>{props.elementConfig.label}</label>
-            <select>
-              {props.elementConfig.option.map(opt => (
-                <option key={opt.value} value={opt.value}> {opt.displayValue}</option>
-              ))}
-            </select>
-          </div>
-        )
-      } else {
-        inputElement = (
-          <div className={[styles.Input, props.elementConfig.size].join(' ')} >
-            <label>{props.elementConfig.label}</label>
-            <select>
-              {props.elementConfig.option.map(opt => (
-                <option key={opt.value} value={opt.value}> {opt.displayValue}</option>
-              ))}
-            </select>
-          </div>
-        )
-      }
+      inputElement = (
+        <select>
+          {props.option.map(opt => (
+            <option key={opt.value}>{opt.displayValue}</option>
+          ))}
+        </select>
+      )
       break
     default: 
-      return inputElement
+      inputElement = (
+        <input type={props.type} placeholder={props.label} value={props.value} />
+      )
   }
-  return inputElement
+
+  return (
+    <div className={[styles.Input ,styles[props.size]].join(' ')} >
+      <label>{props.label}</label>
+      {inputElement}
+    </div>
+  )
 }
 
 export default Input

@@ -1,9 +1,35 @@
+.StoreInfo {
+  margin-bottom: 10px;
+}
+
 .StoreInfo ul {
   padding: 0;
   margin-bottom: 20px;
 }
 
+.StoreInfo li {
+  list-style: none;
+  display: flex;
+  margin-bottom: 10px;
+}
+
 .StoreInfo h4 {
   color: #484848;
   margin: 5px 0;
+}
+
+.StoreInfo p {
+  margin: 0;
+  font-weight: 500;
+  min-width: 150px;
+  color: gainsboro;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.StoreInfo span {
+  margin: 0;
+  font-weight: 500;
+  color: #484848;
+  font-size: 14px;
 }

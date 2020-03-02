@@ -1,39 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './StoreInfo.module.css';
-import StoreItem from './StoreItem/StoreItem';
 
-class StoreInfo extends Component {
-  render() {
-    let filterObj = this.props.details.filter((obj) => {
-      return (
-          obj.id === "storeName" || 
-          obj.id === "storeAddress" ||
-          obj.id === "storePhone" ||
-          obj.id === "companyName" || 
-          obj.id === "companyAddress" ||
-          obj.id === "companyMst"
-        )
-    })
+const StoreInfo = (props) => (
+  <div className={styles.StoreInfo}>
+    <h4>STORE INFO.</h4>
+    <ul>
+      <li>
+        <p>Name :</p>
+        <span>{props.data.storeName.value}</span>
+      </li>
+      <li>
+        <p>Address :</p>
+        <span>{props.data.storeAddress.value}</span>
+      </li>
+      <li>
+        <p>Phone # :</p>
+        <span>{props.data.storePhone.value}</span>
+      </li>
+    </ul>
 
-    console.log(filterObj);
-    
-    
-    return (
-      <div className={styles.StoreInfo}>
-        <h4>{this.props.heading}</h4>
-        <ul>
-          {filterObj.map(detail => (
-            <StoreItem 
-              key={detail.key} 
-              name={detail.config.elementConfig.label} 
-              value={detail.config.value}
-              dataChanged={(event) => this.dataChanged(event, detail.key)}
-            />
-          ))}
-        </ul>
-      </div>
-    )
-  }
-}
+    <h4>RED INVOICE INFO</h4>
+    <ul>
+      <li>
+        <p>Company Name :</p>
+        <span>{props.data.companyName.value}</span>
+      </li>
+      <li>
+        <p>Company Address :</p>
+        <span>{props.data.companyAddress.value}</span>
+      </li>
+      <li>
+        <p>MST :</p>
+        <span>{props.data.companyMst.value}</span>
+      </li>
+    </ul>
+  </div>
+)
 
 export default StoreInfo

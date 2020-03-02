@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import styles from './StoreProfile.module.css';
 import StoreImage from "./StoreImage/StoreImage";
-import BasicInfo from "./BasicInfo/BasicInfo";
-import RedInvoice from "./RedInvoice/RedInvoice";
 import Button from "../UI/Button/Button";
+import FormInfo from "./FormInfo/FormInfo";
 
 class StoreProfile extends Component {
 
   closedHandler = (event) => {
     event.preventDefault()
-    this.props.closedPopup()
-  }
-
-  saveData = (event) => {
-    event.preventDefault()
-    this.props.saveChanged()
     this.props.closedPopup()
   }
 
@@ -27,9 +20,8 @@ class StoreProfile extends Component {
           <StoreImage />
         </div>
         <div className={styles.w60}>
-          <form onSubmit={this.saveData}>
-            <BasicInfo formElementArray={this.props.basic} dataChanged={this.props.dataChanged} />
-            <RedInvoice formElementArray={this.props.invoice} dataChanged={this.props.dataChanged} />
+          <form onSubmit="">
+            <FormInfo data={this.props.data} />
             <Button btnType="Green">Save</Button>
             <Button btnType="None" clicked={this.closedHandler}>Cancel</Button>
           </form>
