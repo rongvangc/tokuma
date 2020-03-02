@@ -1,0 +1,10 @@
+.RedInvoice {
+  width: 100%;
+}
+
+.RedInvoice h4 {
+  font-weight: 500;
+  color: #484844;
+  margin-bottom: 15px;
+  display: block;
+}

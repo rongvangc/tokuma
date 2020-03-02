@@ -1,0 +1,30 @@
+.StoreProfile h4 {
+  margin: 0;
+  font-weight: 500;
+  color: #484848;
+}
+
+.StoreProfile hr {
+  height: 1px;
+  background: #2c904e;
+}
+
+.MtButton {
+  margin-top: 20px;
+}
+
+.w40 {
+  padding: 5px 10px 10px 0;
+  width: 40%;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.w60 {
+  padding: 5px 0 10px 10px;
+  width: 60%;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: top;
+}

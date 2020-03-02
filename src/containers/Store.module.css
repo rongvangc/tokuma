@@ -1,0 +1,14 @@
+.Store {
+  max-width: 400px;
+  margin: 30px auto;
+  display: block;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #f1f1f1;
+}
+
+.Store img {
+  width: 100%;
+  border-radius: 5px;
+}

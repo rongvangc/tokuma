@@ -1,0 +1,21 @@
+.StoreItem {
+  list-style: none;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.StoreItem p {
+  margin: 0;
+  font-weight: 500;
+  min-width: 150px;
+  color: gainsboro;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.StoreItem  span {
+  margin: 0;
+  font-weight: 500;
+  color: #484848;
+  font-size: 14px;
+}

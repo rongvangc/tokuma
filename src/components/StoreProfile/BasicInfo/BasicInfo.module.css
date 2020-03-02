@@ -1,0 +1,10 @@
+.BasicInfo {
+  width: 100%;
+}
+
+.BasicInfo h4 {
+  font-weight: 500;
+  color: #484844;
+  margin-bottom: 15px;
+  display: block;
+}

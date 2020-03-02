@@ -1,0 +1,16 @@
+.StoreImage {
+  width: 100%;
+}
+
+.StoreImage h4 {
+  font-weight: 500;
+  color: #484844;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.StoreImage img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

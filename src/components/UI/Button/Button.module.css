@@ -1,0 +1,30 @@
+.Button {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Gray {
+  background: #e7e7e7;
+  color: #484848;
+}
+
+.Green {
+  background: #2f8f4e;
+  color: white;
+  margin-top: 20px;
+}
+
+.None {
+  background: none;
+  color: #e7e7e7;
+}
+
+.Width50 {
+  width: 50%;
+  float: right;
+}
