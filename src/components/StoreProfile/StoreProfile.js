@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import styles from './StoreProfile.module.css';
 import StoreImage from "./StoreImage/StoreImage";
-import Button from "../UI/Button/Button";
 import FormInfo from "./FormInfo/FormInfo";
 
 class StoreProfile extends Component {
-
-  closedHandler = (event) => {
-    event.preventDefault()
-    this.props.closedPopup()
-  }
 
   render() {
     return (
@@ -20,11 +14,12 @@ class StoreProfile extends Component {
           <StoreImage />
         </div>
         <div className={styles.w60}>
-          <form onSubmit="">
-            <FormInfo data={this.props.data} />
-            <Button btnType="Green">Save</Button>
-            <Button btnType="None" clicked={this.closedHandler}>Cancel</Button>
-          </form>
+          <FormInfo 
+            data={this.props.data} 
+            closedPopup={this.props.closedPopup}
+            handleChange={this.props.handleChange}
+            handleSubmit={this.props.handleSubmit}
+          />
         </div>
       </div>
     )

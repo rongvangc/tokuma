@@ -9,132 +9,35 @@ import StoreProfile from "../components/StoreProfile/StoreProfile";
 class Store extends Component {
 
   state = {
-    formData: {
-      storeName: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-        },
-        value: 'K.O.I Thé',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      storeAddress: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-        },
-        value: '521 Hồ Tùng Mậu, D1, HCM',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      storeDistrict: {
-        elementType: 'select',
-        elementConfig: {
-          option: [
-            {value: 'district_1', displayValue: 'District 1'},
-            {value: 'district_2', displayValue: 'District 2'},
-            {value: 'district_3', displayValue: 'District 3'},
-          ],
-        },
-        value: 'District 1',
-        validation: {},
-        valid: true
-      },
-      storeCity: {
-        elementType: 'select',
-        elementConfig: {
-          option: [
-            {value: 'hcm', displayValue: 'Hồ Chí Minh'},
-            {value: 'hn', displayValue: 'Hà Nội'}
-          ],
-        },
-        value: 'Hồ Chí Minh',
-        validation: {},
-        valid: true
-      },
-      storePhone: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'number',
-        },
-        value: '(338) 886-9944',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      companyName: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-        },
-        value: 'K.O.I Thé International Company',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      companyAddress: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-        },
-        value: '9682 Wakehurst Avenue Arlington Height, IL 60004',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      companyDistrict: {
-        elementType: 'select',
-        elementConfig: {
-          option: [
-            {value: 'district_1', displayValue: 'District 1'},
-            {value: 'district_2', displayValue: 'District 2'},
-            {value: 'district_3', displayValue: 'District 3'},
-          ],
-        },
-        value: 'District 1',
-        validation: {},
-        valid: true
-      },
-      companyCity: {
-        elementType: 'select',
-        elementConfig: {
-          option: [
-            {value: 'hcm', displayValue: 'Hồ Chí Minh'},
-            {value: 'hn', displayValue: 'Hà Nội'}
-          ],
-        },
-        value: 'Hồ Chí Minh',
-        validation: {},
-        valid: true
-      },
-      companyMst: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-        },
-        value: 'P77744944',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      }
+    id: 'z_12',
+    logoUrl: Logo,
+    name: 'K.O.I Thé',
+    address: '521 Hồ Tùng Mậu, D1, HCM',
+    district: [
+      {value: 'district_1', displayValue: 'District 1'},
+      {value: 'district_2', displayValue: 'District 2'},
+      {value: 'district_3', displayValue: 'District 3'},
+    ],
+    city: [
+      {value: 'hcm', displayValue: 'Hồ Chí Minh'},
+      {value: 'hn', displayValue: 'Hà Nội'}
+    ],
+    phone: '(338) 886-9944',
+    redInvoice: {
+      name: 'K.O.I Thé International Company',
+      address: '9682 Wakehurst Avenue Arlington Height, IL 60004',
+      district: [
+        {value: 'district_1', displayValue: 'District 1'},
+        {value: 'district_2', displayValue: 'District 2'},
+        {value: 'district_3', displayValue: 'District 3'},
+      ],
+      city: [
+        {value: 'hcm', displayValue: 'Hồ Chí Minh'},
+        {value: 'hn', displayValue: 'Hà Nội'}
+      ],
+      taxCode: 'P77744944',
     },
     edit: false,
-    imageURL: '',
   }
 
   editHandler = () => {
@@ -145,42 +48,77 @@ class Store extends Component {
     this.setState({edit: false})
   }
 
-  // dataChangeHandler = (event, inputKey) => {
-  //   // Copy state
-  //   const updatedForm = {
-  //     ...this.state.formData
-  //   }
+  // handleChange = name => (e) => {
+  //   e.preventDefault()
     
-  //   // const Key state
-  //   const updateFormElement = {
-  //     ...updatedForm[inputKey]
-  //   }
+  //   this.setState({ [name]: e.target.value }, () => console.log(this.state))
 
-  //   // get data from input 
-  //   updateFormElement.value = event.target.value;
-
-  //   // set data
-  //   updatedForm[inputKey] = updateFormElement;
-
-
-  //   this.setState({formData: updatedForm})
+  //   console.log("name", name);
+  //   console.log("value", e.target.value );
   // }
 
-  render() {
+  handleChange =  e => {
+    e.preventDefault();
+    const { name, value } = e.target;
+
+    console.log("name", name);
+    console.log("value", value );
     
+    this.setState({ [name]: value }, () => console.log(this.state));
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(`
+      --SUBMITTING--
+      name: ${this.state.name}
+      address: ${this.state.address}
+      district: ${this.state.district}
+      phone: ${this.state.phone}
+    `);
+  }
+
+  render() {
+
     return (
       <Fragment>
+          <div >
+            <label htmlFor="name">Store Name</label>
+            <input
+              className=""
+              placeholder="Store Name"
+              type="text"
+              name="name"
+              noValidate
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div >
+            <label htmlFor="name">Store Address</label>
+            <input
+              className=""
+              placeholder="Store Name"
+              type="text"
+              name="phone"
+              noValidate
+              onChange={this.handleChange}
+            />
+          </div>
         <Modal 
           show={this.state.edit} 
           closedModal={this.closedModal}
         >
           <StoreProfile 
-            data={this.state.formData}
+            data={this.state}
+            closedPopup={this.closedModal}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
           />
         </Modal>
         <div className={styles.Store}>
           <img src={Logo} alt="" />
-          <StoreInfo data={this.state.formData} dataChanged={this.dataChangeHandler} />
+          <StoreInfo data={this.state} />
           <Button 
             btnType="Gray" 
             clicked={this.editHandler}
