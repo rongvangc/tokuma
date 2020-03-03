@@ -1,22 +1,45 @@
-import React, { Component }  from 'react';
-import styles from './FormInfo.module.css'
-import Button from '../../UI/Button/Button'
-
+import React, { Component } from "react";
+import styles from "./FormInfo.module.css";
+import Button from "../../UI/Button/Button";
 
 class FormInfo extends Component {
+  state = {
+    id: "",
+    logoUrl: "",
+    name: "",
+    address: "",
+    district: "",
+    city: "",
+    phone: "",
+    redInvoice: {
+      name: "",
+      address: "",
+      district: "",
+      city: "",
+      taxCode: ""
+    },
+    edit: false
+  };
 
-  closedHandler = (event) => {
-    event.preventDefault()
-    this.props.closedPopup()
-  }
+  handleChangeData = name => e => {
+    // const {name , value} = e.target
+    e.preventDefault();
 
-  render () {
-    return(
-      <form onSubmit={this.props.handleSubmit} noValidate >
+    this.setState({ [name]: e.target.value }, () => console.log(this.state));
+  };
+
+  onSave = e => {
+    e.preventDefault();
+    this.props.handleSubmit({...this.state});
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.onSave} noValidate>
         <div className={styles.FormInfo}>
           <h4>BASIC INFO</h4>
-          
-          <div className={styles.Input} >
+
+          <div className={styles.Input}>
             <label htmlFor="name">Store Name</label>
             <input
               className=""
@@ -24,11 +47,11 @@ class FormInfo extends Component {
               type="text"
               name="name"
               noValidate
-              onChange={() => this.props.handleChange("this.state.name")}
+              onChange={this.handleChangeData("name")}
             />
           </div>
 
-          <div className={[styles.Input, styles.w50].join(' ')} >
+          <div className={[styles.Input, styles.w50].join(" ")}>
             <label htmlFor="email">Store Address</label>
             <input
               className=""
@@ -36,122 +59,126 @@ class FormInfo extends Component {
               type="text"
               name="address"
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData("address")}
             />
           </div>
 
-          <div className={[styles.Input, styles.w25].join(' ')} >
+          <div className={[styles.Input, styles.w25].join(" ")}>
             <select
               className=""
               type="select"
               name="district"
               noValidate
-              onChange={this.handleChange}
+              // value={this.props.data.district}
+              onChange={this.handleChangeData("district")}
             >
-              {this.props.data.district.map(dsc => (
-                <option key={dsc.value} value={dsc.value}>{ dsc.displayValue }</option>
-              ))}
+              <option value="district-1">District 1</option>
+              <option value="district-2">District 2</option>
+              <option value="district-3">District 3</option>
             </select>
           </div>
 
-          <div className={[styles.Input, styles.w25].join(' ')} >
+          <div className={[styles.Input, styles.w25].join(" ")}>
             <select
               className=""
               type="select"
               name="city"
               noValidate
-              onChange={this.handleChange}
+              // value={this.props.data.city}
+              onChange={this.handleChangeData("city")}
             >
-              {this.props.data.city.map(cty => (
-                <option key={cty.value} value={cty.value}>{ cty.displayValue }</option>
-              ))}
+              <option value="hn">Hà Nội</option>
+              <option value="hcm">HCM</option>
             </select>
           </div>
 
-          <div className={styles.Input} >
+          <div className={styles.Input}>
             <label htmlFor="phone">Phone #</label>
             <input
               className=""
               placeholder="Phone #"
-              type="text"
               name="phone"
+              type="text"
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData("phone")}
             />
           </div>
-    
+
           <h4>RED INVOICE INFO</h4>
 
-          <div className={styles.Input} >
+          <div className={styles.Input}>
             <label htmlFor="name">Company Name</label>
             <input
               className=""
               placeholder="Company Name"
               type="text"
-              name="name"
+              name="companyName"
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData}
             />
           </div>
 
-          <div className={[styles.Input, styles.w50].join(' ')} >
+          <div className={[styles.Input, styles.w50].join(" ")}>
             <label htmlFor="email">Company Address</label>
             <input
               className=""
               placeholder="Company Address"
               type="text"
-              name="address"
+              name="companyAddress"
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData}
             />
           </div>
 
-          <div className={[styles.Input, styles.w25].join(' ')} >
+          <div className={[styles.Input, styles.w25].join(" ")}>
             <select
               className=""
               type="select"
-              name="district"
+              name="companyDistrict"
+              // value={this.props.data.redInvoice.district}
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData}
             >
-              {this.props.data.redInvoice.district.map(dsc => (
-                <option key={dsc.value} value={dsc.value}>{ dsc.displayValue }</option>
-              ))}
+              <option value="district-1">District 1</option>
+              <option value="district-2">District 2</option>
+              <option value="district-3">District 3</option>
             </select>
           </div>
 
-          <div className={[styles.Input, styles.w25].join(' ')} >
+          <div className={[styles.Input, styles.w25].join(" ")}>
             <select
               className=""
               type="select"
-              name="city"
+              name="companyCity"
+              // value={this.props.data.redInvoice.city}
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData}
             >
-              {this.props.data.redInvoice.city.map(cty => (
-                <option key={cty.value} value={cty.value}>{ cty.displayValue }</option>
-              ))}
+              <option value="hn">Hà Nội</option>
+              <option value="hcm">HCM</option>
             </select>
           </div>
 
-          <div className={styles.Input} >
-            <label htmlFor="taxCode">Phone #</label>
+          <div className={styles.Input}>
+            <label htmlFor="taxCode">MST</label>
             <input
               className=""
-              placeholder="Phone #"
+              placeholder="MST"
+              name="companyTaxCode"
               type="text"
-              name="taxCode"
               noValidate
-              onChange={this.handleChange}
+              onChange={this.handleChangeData}
             />
           </div>
 
           <Button btnType="Green">Save</Button>
-          <Button btnType="None" clicked={this.closedHandler}>Cancel</Button>
+          <Button btnType="None" clicked={this.props.data.closedPopup}>
+            Cancel
+          </Button>
         </div>
       </form>
-    )
+    );
   }
 }
 
-export default FormInfo
+export default FormInfo;

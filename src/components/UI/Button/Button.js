@@ -5,6 +5,7 @@ const Button = (props) => (
   <button
     className={ [styles.Button, styles[props.btnType], styles[props.btnWidth]].join(' ') }
     onClick={props.clicked}
+    onSubmit={props.onSubmit}
   >
     {props.children}
   </button>
