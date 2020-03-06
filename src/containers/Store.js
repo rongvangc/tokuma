@@ -1,91 +1,55 @@
 import React, { Component, Fragment } from "react";
-import Logo from "../assets/logo.jpg";
-import Button from "../components/UI/Button/Button";
+import { connect } from 'react-redux' 
+
 import styles from "./Store.module.css";
+
+import Button from "../components/UI/Button/Button";
 import Modal from '../components/UI/Modal/Modal';
 import StoreInfo from "../components/StoreInfo/StoreInfo";
 import StoreProfile from "../components/StoreProfile/StoreProfile";
+import * as actions from '../store/actions'
 
-class Store extends Component {
+import withErrorHandler from '../withErrorHandler'
+import axios from '../axios-store'
+import Spinner from "../components/UI/Spinner/Spinner";
 
-  state = {
-    id: 'z_12',
-    logoUrl: Logo,
-    name: 'K.O.I Thé',
-    address: '521 Hồ Tùng Mậu, D1, HCM',
-    district: 'District 1',
-    city: 'Hà Nội',
-    phone: '(338) 886-9944',
-    redInvoice: {
-      name: 'K.O.I Thé International Company',
-      address: '9682 Wakehurst Avenue Arlington Height, IL 60004',
-      district: 'District 1',
-      city: 'Hà Nội',
-      taxCode: 'P77744944',
-    },
-    edit: false,
-  }
 
-  // componentWillReceiveProps(newProps) {
-  //   this.setState({name: newProps.name});
-  // }
+export class Store extends Component {
 
-  editHandler = () => {
-    this.setState({edit: true})
-  }
-
-  closedModal = (e) => {
-    e.preventDefault()
-    this.setState({edit: false})
-  }
-
-  handleChange = name => (e) => {
-    this.setState({
-      ...this.state,
-      [name]: e.target.value
-    }, () => console.log(this.state))
-    
-    console.log("name", name);
-    console.log("value", e.target.value );
-  }
-
-  handleSubmit = (...formData) => {
-    // e.preventDefault()
-    this.setState({...formData})
-    this.setState({edit: false})
-
-    console.log(this.state)
-
-    console.log(`
-      --SUBMITTING--
-      name: ${this.state.name}
-      address: ${this.state.address}
-      district: ${this.state.district}
-      phone: ${this.state.phone}
-    `);
+  componentDidMount() {
+    this.props.onFetchData()
+    // console.log(this.props.store);  
   }
 
   render() {
+    let storeProfile = null;
+    let storeInfo = <Spinner />;
+
+    if (this.props.store && this.props.store.redInvoice) {
+      storeProfile = <StoreProfile 
+        data={this.props.store}
+        closedModal={this.props.onClosedModal}
+        onSave={this.props.onSaveChanged}
+        onSaveData={this.props.onSaveDataChanged}
+        onHandleUpload={this.handleUpload}
+      />
+      storeInfo = <StoreInfo data={this.props.store} />
+    }
 
     return (
       <Fragment>
         <Modal 
-          show={this.state.edit} 
-          closedModal={this.closedModal}
+          show={this.props.store.edit} 
+          closedModal={this.props.onClosedModal}
         >
-          <StoreProfile 
-            data={this.state}
-            closedPopup={this.closedModal}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
+          {storeProfile}
         </Modal>
         <div className={styles.Store}>
-          <img src={Logo} alt="" />
-          <StoreInfo data={this.state} />
+          <img src={this.props.store.logoUrl} alt="" />
+          {storeInfo}
           <Button 
             btnType="Gray" 
-            clicked={this.editHandler}
+            clicked={this.props.onEditChanged}
           >
             Edit Profile
           </Button>
@@ -93,6 +57,23 @@ class Store extends Component {
       </Fragment>
     );
   }
+
 }
 
-export default Store;
+const mapStateToProps = state => {
+  return {
+    store: state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onEditChanged: () => dispatch(actions.editForm()),
+    onClosedModal: () => dispatch(actions.closeModal()),
+    onSaveChanged: (formData) => dispatch(actions.saveFormSuccess(formData)),
+    onSaveDataChanged: (formDataUpload) => dispatch(actions.saveFormData(formDataUpload)),
+    onFetchData: () => dispatch(actions.fetchData()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Store, axios));

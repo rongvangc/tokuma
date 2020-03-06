@@ -1,12 +1,14 @@
-.Modal {
+.Toaster {
   position: fixed;
   z-index: 500;
   background-color: white;
-  width: 70%;
+  width: 300px;
   padding: 0 20px;
   border-radius: 10px;
-  left: 15%;
-  top: 5%;
+  right: 2%;
+  top: 2%;
+  border: 1.5px dashed #F44336;
+  box-shadow: 2px 2px 7px 0px #e8e8e8;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 }

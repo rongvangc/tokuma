@@ -9,7 +9,6 @@
   display: block;
 }
 
-
 .Input {
   display: flex;
   flex-direction: column;
@@ -44,17 +43,20 @@
   border-radius: 5px;
   font-size: 16px;
   color: #484848;
+  outline: none;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: gainsboro;
+.ErrorInput {
+  border:1px solid #ff0303 !important;
+  background: beige;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  color: gainsboro;
+
+.ErrorMessage {
+  color: red;
+  font-size: 0.75em;
+  display: relative;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  color: gainsboro;
-}
-:-moz-placeholder { /* Firefox 18- */
-  color: gainsboro;
+
+:disabled {
+  background: #dddddd;
 }
