@@ -22,30 +22,34 @@ export class Store extends Component {
   }
 
   render() {
-    let storeProfile = null;
+    let modal = null;
     let storeInfo = <Spinner />;
 
     if (this.props.store && this.props.store.redInvoice) {
-      storeProfile = <StoreProfile 
+      modal = <Modal 
+      show={this.props.store.edit} 
+      closedModal={this.props.onClosedModal}
+    >
+      <StoreProfile 
         data={this.props.store}
         closedModal={this.props.onClosedModal}
         onSave={this.props.onSaveChanged}
         onSaveData={this.props.onSaveDataChanged}
         onHandleUpload={this.handleUpload}
       />
-      storeInfo = <StoreInfo data={this.props.store} />
+    </Modal>
+      storeInfo = (
+      <Fragment>
+        <img src={this.props.store.logoUrl} alt="" />
+        <StoreInfo data={this.props.store} />
+      </Fragment>
+      )
     }
 
     return (
       <Fragment>
-        <Modal 
-          show={this.props.store.edit} 
-          closedModal={this.props.onClosedModal}
-        >
-          {storeProfile}
-        </Modal>
+        {modal}
         <div className={styles.Store}>
-          <img src={this.props.store.logoUrl} alt="" />
           {storeInfo}
           <Button 
             btnType="Gray" 
