@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux' 
 
 import styles from "./Store.module.css";
+import checkedImg from '../assets/success.png';
 
 import Button from "../components/UI/Button/Button";
 import Modal from '../components/UI/Modal/Modal';
@@ -12,18 +13,24 @@ import * as actions from '../store/actions'
 import withErrorHandler from '../withErrorHandler'
 import axios from '../axios-store'
 import Spinner from "../components/UI/Spinner/Spinner";
+import Check from "../components/UI/Check/Check";
 
 
 export class Store extends Component {
 
   componentDidMount() {
-    this.props.onFetchData()
-    // console.log(this.props.store);  
+    this.props.onFetchData()  
   }
 
   render() {
     let modal = null;
     let storeInfo = <Spinner />;
+    let popupSuccess = null
+
+    if(this.props.store.isSuccess) {
+      console.log('thành công');
+      popupSuccess = <Check show><img src={checkedImg} alt=""/></Check>
+    }
 
     if (this.props.store && this.props.store.redInvoice) {
       modal = <Modal 
@@ -48,6 +55,7 @@ export class Store extends Component {
 
     return (
       <Fragment>
+        {popupSuccess}
         {modal}
         <div className={styles.Store}>
           {storeInfo}

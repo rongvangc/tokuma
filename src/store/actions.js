@@ -24,26 +24,41 @@ export const saveFormSuccess = () => {
   }
 }
 
-export const saveFormFail = (error) => {
+export const saveFormFail = () => {
   return {
     type: SAVE_FORM_FAIL,
-    error: error
   }
 }
 
 export const saveFormData = (formDataUpload) => {
-  return dispatch => {
-    axios.put('/store.json', {
-      ...formDataUpload})
-    .then(response => {
-      dispatch(fetchData());
-      dispatch(saveFormSuccess());
-    })
-    .catch(error => {
-      dispatch(saveFormFail(error))
-    })
+    return dispatch => {
+      axios.put('/store.json', {...formDataUpload})
+      .then(response => {
+        console.log(response.data);
+        dispatch(saveFormSuccess());
+        setTimeout(() => {
+          dispatch(fetchData())
+        }, 700)
+      })
+      .catch(error => {
+        dispatch(saveFormFail(error))
+      })
   }
 }
+
+// export const saveFormData = (formDataUpload) => {
+//   return dispatch => {
+//     axios.put('/store.json', {
+//       ...formDataUpload}, )
+//     .then(response => {
+//       dispatch(fetchData());
+//       dispatch(saveFormSuccess());
+//     })
+//     .catch(error => {
+//       dispatch(saveFormFail(error))
+//     })
+//   }
+// }
 
 export const closeModal = () => {
   return {

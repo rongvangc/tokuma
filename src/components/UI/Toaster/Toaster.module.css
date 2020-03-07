@@ -1,6 +1,6 @@
 .Toaster {
   position: fixed;
-  z-index: 500;
+  z-index: 1000;
   background-color: white;
   width: 300px;
   padding: 0 20px;

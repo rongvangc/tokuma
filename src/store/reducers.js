@@ -1,7 +1,9 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-  edit: false
+  edit: false,
+  errorValid: false,
+  isSuccess: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,20 +25,22 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SAVE_FORM_SUCCESS:
       return {
           ...state,
-          edit: false
+          edit: false,
+          errorValid: false,
+          isSuccess: true
         }
     case actionTypes.SAVE_FORM_FAIL:
       return {
           ...state,
+          errorValid: true
         }
     case actionTypes.FETCH_DATA_START:
       return {
-          ...state,
+          ...state
         }
     case actionTypes.FETCH_DATA_SUCCESS:
       return {
           ...action.dataStore,
-          edit: false
         }  
     case actionTypes.FETCH_DATA_FAIL:
       return {

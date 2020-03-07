@@ -12,6 +12,12 @@ class FormInfo extends Component {
   }
 
   render() {
+    let errorValid = '';
+
+    if(this.props.store.errorValid) {
+      errorValid = <span className={styles.ErrorMessage}>Sorry that name is not available. please try a different one</span>
+    }
+
     let errorMessage = '';
     let errorClass = '';
     const regex = /^(?:\d{8}(?:\d{2}(?:\d{2})?)?|\(\+?\d{2,3}\)\s?(?:\d{4}[\s*.-]?\d{4}|\d{3}[\s*.-]?\d{3}|\d{2}([\s*.-]?)\d{2}\1\d{2}(?:\1\d{2})?))$/;
@@ -40,6 +46,7 @@ class FormInfo extends Component {
                 value={this.props.data.name}
                 onChange={this.props.onHandleChangeData("name")}
               />
+              {errorValid}
             </div>
 
             <div className={[styles.Input, styles.w50].join(" ")}>

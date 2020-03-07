@@ -24,6 +24,10 @@ const withErrorHandler = ( WrappedComponent, axios ) => {
       console.log('Will Unmount', this.reqInterceptor, this.reqInterceptor);
     }
 
+    errorConfirmedHandler = () => {
+      this.setState({error: null})
+    }
+
 
     render() {
       console.log(this.state.error);
@@ -35,7 +39,7 @@ const withErrorHandler = ( WrappedComponent, axios ) => {
           {/* <Modal show={this.state.error} >
             {this.state.error ? this.state.error.message : null}
           </Modal> */}
-          <Toaster show={this.state.error}>
+          <Toaster show={this.state.error} clicked={this.errorConfirmedHandler} >
             <img src={errorImage} alt="" style={{ width: '100%' }}/>
           </Toaster>
           <WrappedComponent {...this.props} />

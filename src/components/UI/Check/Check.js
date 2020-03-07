@@ -1,9 +1,8 @@
 import React from 'react';
-import styles from './Toaster.module.css'
+import styles from './Check.module.css'
 
-const Toaster = (props) => (
-
-  <div className={styles.Toaster} onClick={props.clicked} style={{
+const Check = (props) => (
+  <div className={styles.Check} style={{
     opacity: props.show ? '1' : '0',
     transform: props.show ? 'translateY(0)' : 'translateY(-100%)'
   }}>
@@ -11,4 +10,4 @@ const Toaster = (props) => (
   </div> 
 )
 
-export default Toaster
+export default Check

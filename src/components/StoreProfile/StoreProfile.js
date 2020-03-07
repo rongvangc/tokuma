@@ -8,6 +8,9 @@ import FormInfo from "./FormInfo/FormInfo";
 import { storage } from '../../firebase/firebase';
 import * as actions from '../../store/actions';
 
+import withErrorHandler from '../../withErrorHandler'
+import axios from '../../axios-store'
+
 class StoreProfile extends Component {
 
   state = {
@@ -75,7 +78,6 @@ class StoreProfile extends Component {
   }
 
   _onSave = () => {
-    // this.props.onSave(this.state)
     this.props.onSaveData(this.state)
   }
 
@@ -109,6 +111,7 @@ class StoreProfile extends Component {
             onCancel={this._onCancel}
             onHandleChangeInvoice={this.handleChangeInvoice}
             onHandleChangeData={this.handleChangeData}
+            onShowError={this.props.onShowError}
           />
         </div>
       </div>
@@ -124,9 +127,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUploadSuccess: () => dispatch(actions.upLoadImageSuccess()),
-    onUploadFail: () => dispatch(actions.upLoadImageFail()),
+    onShowError: (error) => dispatch(actions.saveFormFail(error))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StoreProfile)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(StoreProfile, axios))
