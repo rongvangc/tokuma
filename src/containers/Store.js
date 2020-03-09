@@ -29,7 +29,7 @@ export class Store extends Component {
 
     if(this.props.store.isSuccess) {
       console.log('thành công');
-      popupSuccess = <Check show><img src={checkedImg} alt=""/></Check>
+      popupSuccess = <Check show><img className={styles.CheckIcon} src={checkedImg} alt=""/></Check>
     }
 
     if (this.props.store && this.props.store.redInvoice) {

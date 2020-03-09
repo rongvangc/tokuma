@@ -75,6 +75,8 @@ class StoreProfile extends Component {
         this.setState({logoUrl: url})
       })
     })
+
+    this.props.onShowPreview()
   }
 
   _onSave = () => {
@@ -97,9 +99,11 @@ class StoreProfile extends Component {
         <hr/>
         <div className={styles.w40}>
           <StoreImage 
-            data={this.state.logoUrl} 
+            data={this.state.logoUrl}
+            preview={this.props.store.isPreview}
             onHandleUpload={this.handleImg}
             onRemoveUpload={this.removeImg}
+            onClosePreview={this.props.onClosePreview}
           />
         </div>
         <div className={styles.w60}>
@@ -127,7 +131,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onShowError: (error) => dispatch(actions.saveFormFail(error))
+    onShowError: (error) => dispatch(actions.saveFormFail(error)),
+    onShowPreview: () => dispatch(actions.preview()),
+    onClosePreview: () => dispatch(actions.closePreview())
   }
 }
 

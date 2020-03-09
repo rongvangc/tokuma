@@ -34,7 +34,6 @@ class FormInfo extends Component {
         <form onSubmit={this._onSubmit} noValidate>
           <div className={styles.FormInfo}>
             <h4>BASIC INFO</h4>
-
             <div className={styles.Input}>
               <label htmlFor="name">Store Name</label>
               <input

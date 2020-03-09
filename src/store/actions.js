@@ -11,6 +11,21 @@ export const FETCH_DATA = 'FETCH_DATA';
 export const FETCH_DATA_FAIL = 'FETCH_DATA_FAIL';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS'
 export const FETCH_DATA_START = 'FETCH_DATA_START';
+export const PREVIEW = 'PREVIEW';
+export const CLOSE_PREVIEW = 'CLOSE_PREVIEW'
+
+
+export const preview = () => {
+  return {
+    type: PREVIEW
+  }
+}
+
+export const closePreview = () => {
+  return {
+    type: CLOSE_PREVIEW
+  }
+}
 
 export const editForm = () => {
   return {
@@ -38,10 +53,11 @@ export const saveFormData = (formDataUpload) => {
         dispatch(saveFormSuccess());
         setTimeout(() => {
           dispatch(fetchData())
-        }, 700)
+        }, 500)
       })
       .catch(error => {
         dispatch(saveFormFail(error))
+        console.log(error.message);  
       })
   }
 }

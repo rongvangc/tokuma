@@ -3,11 +3,22 @@ import * as actionTypes from './actions';
 const initialState = {
   edit: false,
   errorValid: false,
-  isSuccess: false
+  isSuccess: false,
+  isPreview: false
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.PREVIEW:
+      return {
+          ...state,
+          isPreview: true
+        }
+    case actionTypes.CLOSE_PREVIEW:
+      return {
+          ...state,
+          isPreview: false
+        }
     case actionTypes.EDIT_FORM:
       return {
           ...state,

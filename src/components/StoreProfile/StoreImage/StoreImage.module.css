@@ -9,8 +9,35 @@
   display: block;
 }
 
+.StoreImage h3 {
+  display: block;
+  background: #66ccff;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 15px 0;
+  border: 5px solid #66ccff;
+  position: relative;
+  bottom: -10px;
+  border-radius: 5px;
+}
+
 .StoreImage img {
   width: 100%;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.Preview {
+  width: 100%;
+  border: 5px solid #66ccff;
+  background: white;
+}
+
+.ClosePreview {
+  width: 50px !important;
+  position: absolute;
+  right: -30px;
+  top: -10px;
 }

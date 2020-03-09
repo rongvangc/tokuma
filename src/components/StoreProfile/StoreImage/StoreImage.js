@@ -1,37 +1,11 @@
 import React, { Component } from 'react';
+
 import styles from './StoreImage.module.css'
 import Button from '../../UI/Button/Button';
+import CloseIcon from '../../../assets/cancel.png'
+import Preview from '../../UI/Preview/Preview';
 
 class StoreImage extends Component {
-
-  // state = {
-  //   imageUrl: this.props.img
-  // }
-
-  // handlePreview = (event) => {
-  //   this.setState({imageUrl: this.props.img})
-  // }
-
-  // handleImg = (event) => {
-  //   const image = event.target.files[0]
-
-  //   const uploadTask = storage.ref(`/images/${image.name}`).put(image);
-    
-  //   uploadTask.on('state_changed', 
-  //   (snapShot) => {
-  //     //takes a snap shot of the process as it is happening
-  //     console.log(snapShot)
-  //   }, 
-  //   (error) => {
-  //     //catches the errors
-  //     console.log(error); 
-  //   }, 
-  //   () => {
-  //     storage.ref('images').child(image.name).getDownloadURL().then(url => {
-  //       this.setState({imageUrl: url})
-  //     })
-  //   })
-  // }
 
   handleEdit = () => {
     const fileInput = document.getElementById('logoInput')
@@ -39,21 +13,35 @@ class StoreImage extends Component {
   }
 
   render() {
+
+    let preview = null;
+
+    if(this.props.preview) {
+      preview = <Preview 
+                  show={this.props.preview}
+                >
+                  <h3>PREVIEW BOX<br></br><small>Wait a second, the image will change</small></h3>
+                  <img className={styles.ClosePreview} src={CloseIcon} alt="" onClick={this.props.onClosePreview} />
+                  <img className={styles.Preview} src={this.props.data} alt="" onClick={this.props.onClosePreview}  />
+                </Preview>
+    }
+
     return (
       <div className={styles.StoreImage}>
-      <h4>STORE IMAGE</h4>
-      <img src={this.props.data} alt="" className={styles.StoreImage} onClick={this.handleEdit}  />
-      <input 
-        type="file" 
-        id="logoInput" 
-        // accept="image/png, image/jpeg"
-        changed={this.props.imageChange} 
-        hidden
-        onChange={(e) => this.props.onHandleUpload(e.target.files[0])}
-      />
-      <Button btnType="Gray" btnWidth="Width50" clicked={this.handleEdit} >Upload Image</Button>
-      <Button btnType="None" btnWidth="Width50" clicked={this.props.onRemoveUpload} >Remove</Button>
-    </div>
+        {preview}
+        <h4>STORE IMAGE</h4>
+        <img src={this.props.data} alt="" className={styles.StoreImage} onClick={this.handleEdit}  />
+        <input 
+          type="file" 
+          id="logoInput" 
+          // accept="image/png, image/jpeg"
+          changed={this.props.imageChange} 
+          hidden
+          onChange={(e) => this.props.onHandleUpload(e.target.files[0])}
+        />
+        <Button btnType="Gray" btnWidth="Width50" clicked={this.handleEdit} >Upload Image</Button>
+        <Button btnType="None" btnWidth="Width50" clicked={this.props.onRemoveUpload} >Remove</Button>
+      </div>
     )
   }
 }
